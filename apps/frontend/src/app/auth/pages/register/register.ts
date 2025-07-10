@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
+import {  AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 // import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 // import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.html',
   styleUrl: './register.scss'
 })
-export class Register implements AfterViewInit {
+export class Register implements AfterViewInit{
 
   // private fb = inject(FormBuilder);
 
@@ -47,11 +47,12 @@ export class Register implements AfterViewInit {
 
    private fb = inject(FormBuilder);
   private auth = inject(Auth);
-
+  @ViewChild('recaptchaContainer', { static: false }) recaptchaContainer: ElementRef = inject(ElementRef);
   phoneForm: FormGroup;
   otpSent = false;
   showPhoneForm = false;
   verificationId: string | null = null;
+recaptchaVerifier?: RecaptchaVerifier;
 
   constructor() {
     this.phoneForm = this.fb.group({
@@ -60,17 +61,6 @@ export class Register implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-  if (this.showPhoneForm) {
-    this.setupRecaptcha();
-  }
-}
-
-setupRecaptcha() {
-   if (!this.recaptchaVerifier) {
-    this.recaptchaVerifier = new RecaptchaVerifier(this.auth, 'recaptcha-container', this.auth.app);
-  }
-}
 
   async signInWithGoogle() {
     const provider = new GoogleAuthProvider();
@@ -82,22 +72,46 @@ setupRecaptcha() {
     }
   }
 
- recaptchaVerifier: RecaptchaVerifier | null = null;
-
-sendOTP() {
-  if (!this.recaptchaVerifier) {
-    this.recaptchaVerifier = new RecaptchaVerifier(this.auth, 'recaptcha-container', this.auth.app);
+ ngAfterViewInit() {
+    if (this.recaptchaContainer) {
+    this.setupReCAPTCHA();
+  } else {
+    console.error('reCAPTCHA container not found!');
+  }
   }
 
-  signInWithPhoneNumber(this.auth, this.phoneForm.value.phone, this.recaptchaVerifier)
-    .then((result) => {
+ setupReCAPTCHA() {
+    if (!this.recaptchaVerifier) {
+      this.recaptchaVerifier = new RecaptchaVerifier(
+        this.auth,
+        this.recaptchaContainer.nativeElement,
+        {
+          size: 'normal',
+          callback: (response: any) => {
+            console.log('reCAPTCHA solved:', response);
+          }
+        }
+      );
+      this.recaptchaVerifier.render();
+    }
+  }
+
+  async sendOTP() {
+    this.showPhoneForm = true;
+    try {
+      const result = await signInWithPhoneNumber(
+        this.auth,
+        '+917040307097',
+        this.recaptchaVerifier
+      );
       this.verificationId = result.verificationId;
       this.otpSent = true;
-    })
-    .catch((error) => {
-      console.error('Error sending OTP', error);
-    });
-}
+      console.log('OTP sent:', result.verificationId);
+    } catch (error) {
+      console.error('Failed to send OTP', error);
+    }
+  }
+
   async verifyOTP() {
     if (!this.verificationId) return;
     const credential = PhoneAuthProvider.credential(

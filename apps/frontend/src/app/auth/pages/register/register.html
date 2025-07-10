@@ -61,9 +61,9 @@
   </button>
 </div>
 
-<form *ngIf="showPhoneForm" [formGroup]="phoneForm" (ngSubmit)="verifyOTP()">
-  <input formControlName="phone" placeholder="+1 555 123 4567" class="form-control mb-2" />
-  <div id="recaptcha-container" class="mb-2"></div>
+<form  [formGroup]="phoneForm" (ngSubmit)="verifyOTP()">
+    <input formControlName="phone" placeholder="+1 555 123 4567" class="form-control mb-2" />
+    <div #recaptchaContainer class="mb-3"></div>
   <input *ngIf="otpSent" formControlName="otp" placeholder="Enter OTP" class="form-control mb-2" />
   <button class="btn btn-primary" type="submit">{{ otpSent ? 'Verify OTP' : 'Send OTP' }}</button>
 </form>
