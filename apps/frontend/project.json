@@ -21,7 +21,10 @@
             "input": "apps/frontend/public"
           }
         ],
-        "styles": ["apps/frontend/src/styles.scss"]
+        "styles": [
+          "apps/frontend/src/styles.scss",            
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ]
       },
       "configurations": {
         "production": {
