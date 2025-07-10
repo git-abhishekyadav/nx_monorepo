@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<!-- <div class="card mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-10 col-md-8 col-lg-6">
       <div class="card-header">
@@ -49,4 +49,21 @@
       </div>
     </div>
   </div>
+</div> -->
+
+
+<div class="text-center mb-3">
+  <button class="btn btn-outline-primary w-100 mb-2" (click)="signInWithGoogle()">
+    <i class="bi bi-google"></i> Register with Gmail
+  </button>
+  <button class="btn btn-outline-success w-100" (click)="sendOTP()">
+    <i class="bi bi-phone"></i> Register with Phone
+  </button>
 </div>
+
+<form *ngIf="showPhoneForm" [formGroup]="phoneForm" (ngSubmit)="verifyOTP()">
+  <input formControlName="phone" placeholder="+1 555 123 4567" class="form-control mb-2" />
+  <div id="recaptcha-container" class="mb-2"></div>
+  <input *ngIf="otpSent" formControlName="otp" placeholder="Enter OTP" class="form-control mb-2" />
+  <button class="btn btn-primary" type="submit">{{ otpSent ? 'Verify OTP' : 'Send OTP' }}</button>
+</form>
