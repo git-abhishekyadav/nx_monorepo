@@ -81,3 +81,22 @@ And join the Nx community:
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 # nx_monorepo
+
+
+src/
+├── app/
+│   ├── auth/
+|   |    |pages/
+│   │       ├── login/
+│   │       │   └── login.component.ts
+│   │       ├── register/
+│   │       │   └── register.component.ts
+│   │   ├── services/
+│   │   │   └── auth.service.ts
+│   │   ├── guards/
+│   │   │   └── auth.guard.ts
+│   │   ├── interceptors/
+│   │   │   └── auth.interceptor.ts
+│   │   ├── models/
+│   │   │   └── user.model.ts
+│   │   └── auth.routes.ts
