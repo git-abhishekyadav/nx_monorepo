@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:3000', // Adjust this URL to your backend API endpoint
   firebaseConfig: {
 
   apiKey: "AIzaSyDrmStBhuNY-TXO4dNCTIfe_GCw_Goqbm4",
@@ -18,8 +19,7 @@ export const environment = {
 
   appId: "1:267635503870:web:087e9364c0ecb59a4cebaf",
 
-  measurementId: "G-M4K6M9RSCQ"
-
+  measurementId: "G-M4K6M9RSCQ",
 }
 
 };

@@ -3,3 +3,4 @@ export enum Role {
   Lawyer = 2,
   Association = 3
 }
+
