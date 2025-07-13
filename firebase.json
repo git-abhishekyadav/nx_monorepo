@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "dist/apps/backend",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/main.js"
+      }
+    ]
+  },
+  "functions": {
+    "source": "functions"
+  }
+}
