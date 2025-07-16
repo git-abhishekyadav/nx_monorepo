@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body class="">
+  <table border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+          <td>&nbsp;</td>
+          <td class="container">
+              <div class="content">
+
+                  <!-- START CENTERED WHITE CONTAINER -->
+                  <table class="main">
+
+                      <!-- START MAIN CONTENT AREA -->
+                      <tr>
+                          <td class="wrapper">
+                              <table border="0" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                      <td>
+                                              <%- body %>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <% if(hasSignOff) { %>
+                                              <p>If you have questions, please email us: <%= supportEmail %></p>
+                                              <p>Thanks!</p>
+                                              <br />
+                                              <p><%= companySignOff %></p>
+                                              <% if(companySignOffImage) { %>
+                                              <img src="<%= companySignOffImage %>"></img>
+                                              <% } %>
+                                          <% } %>
+                                      </td>
+                                  </tr>
+
+                              </table>
+                          </td>
+                      </tr>
+
+                      <!-- END MAIN CONTENT AREA -->
+                  </table>
+
+                  <!-- START FOOTER -->
+                  <div class="footer">
+                      <table border="0" cellpadding="0" cellspacing="0">
+                          <% if(hasCustomFooter) { %>
+                              <tr>
+                                  <td class="content-block">
+                                      <%= footer %>
+                                  </td>
+                              </tr>
+                          <% } else { %>
+                              <tr>
+                                  <td class="content-block">
+                                      <span class="apple-link">Innate.ly, 3472 Research Parkway, Suite 104, Colorado Springs, CO 80920</span>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td class="content-block powered-by">
+                                      Powered by <a href="http://innate.ly">Innate.ly</a>.
+                                  </td>
+                              </tr>
+                          <% } %>
+                      </table>
+                  </div>
+                  <!-- END FOOTER -->
+
+                  <!-- END CENTERED WHITE CONTAINER -->
+              </div>
+          </td>
+          <td>&nbsp;</td>
+      </tr>
+  </table>
+  </body>
+  </html>

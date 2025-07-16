@@ -1,0 +1,80 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        h3 {
+            margin-bottom: 16px !important;
+        }
+
+        p {
+            margin-bottom: 5px !important;
+        }
+
+        .body {
+            padding-top: 16px !important;
+            margin-bottom: 32rem;
+        }
+
+        .main-content {
+            padding: 16px;
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+    </style>
+</head>
+
+<body class="body">
+
+    <div class="main-content">
+
+        Hi <b> <%= memberName %> <b>,
+        <br>
+        <div>Your order has been successfully created.</div>
+        <div class="item-header">Receipt</div>
+        <div>
+            <table>
+                <%
+                    var total = 0;
+                    for(var i=0; i<orderItems.length; i++) {
+                    total += orderItems[i].price * orderItems[i].qty;
+                %>
+                <tr>
+                    <td>
+                        <strong><%= orderItems[i].displayName %></strong>
+                    </td>
+                    <td>
+                        Qty: <%= orderItems[i].qty %>
+                    </td>
+                    <td align="right">
+                        <%= formatCurrency(orderItems[i].price * orderItems[i].qty) %>
+                    </td>
+                </tr>
+                <%
+                    }
+                %>
+                <tr>
+                    <td colspan="3">
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><strong>Total: </strong></td>
+                    <td align="right"><%= formatCurrency(total) %></td>
+                </tr>
+            </table>
+        </div>
+
+        <img src="https://halo-assets.s3.amazonaws.com/showday/APHA+Horizontal+Logo.jpg">
+    </div>
+</body>
+
+</html>
