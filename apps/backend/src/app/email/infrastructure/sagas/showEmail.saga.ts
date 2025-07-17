@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { ICommand, ofType, Saga } from "@nestjs/cqrs";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { PdfGeneratedEvent } from "../../../pdf/domain/events/pdfGenerated/pdfGenerated.event";
+// import { PdfGeneratedEvent } from "../../../pdf/domain/events/pdfGenerated/pdfGenerated.event";
 import { SendEmailCommand } from "../../application/commands/sendEmail/sendEmail.command";
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ShowEmailSagas {
     events$: Observable<any>
   ): Observable<ICommand> => {
     return events$.pipe(
-      ofType(PdfGeneratedEvent),
+      // ofType(PdfGeneratedEvent),
       map(event => {
         return new SendEmailCommand(
           event.emailTemplateName,

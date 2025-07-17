@@ -5,6 +5,7 @@
   "scripts": {},
   "private": true,
   "dependencies": {
+    "@anchan828/nest-sendgrid": "^0.9.5",
     "@angular/common": "^20.0.6",
     "@angular/compiler": "~20.0.0",
     "@angular/core": "^20.0.6",
@@ -25,7 +26,9 @@
     "bootstrap": "^5.3.7",
     "esbuild": "0.25.6",
     "firebase": "^11.10.0",
+    "handlebars": "^4.7.8",
     "koa": "3.0.0",
+    "mjml": "^4.15.3",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.3",
     "reflect-metadata": "^0.1.13",

@@ -1,6 +1,6 @@
-import { ImportLeasesFromHorsesHandler } from "./importLeasesFromHorses/importLeasesFromHorses.handler";
+import { RegisterAccountHandler } from "./registerAccount/registerAccount.handler";
 
 
 export const commandHandlers = [
-  ImportLeasesFromHorsesHandler
+  RegisterAccountHandler
 ];

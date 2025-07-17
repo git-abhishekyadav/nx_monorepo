@@ -8,16 +8,9 @@ import { environment } from '../../../environments/environment';
 export class Auth {
   private http = inject(HttpClient);
 
-  login(credentials: { email: string; password: string }) {
+  register(credentials: { email: string; password: string }) {
     // Implement login logic here
-    const url = `${environment.apiUrl}/api/login`;
-    return this.http.post(url, credentials).subscribe({
-      next: (response) => {
-        console.log('Login successful', response);
-      },
-      error: (error) => {
-        console.error('Login failed', error);
-      }
-    });
+    const url = `${environment.apiUrl}/api/register`;
+    return this.http.post(url, credentials);
   }
 }

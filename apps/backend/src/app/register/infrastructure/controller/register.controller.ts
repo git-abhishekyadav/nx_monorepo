@@ -1,43 +1,21 @@
-import { Body, Controller, Get, Post, Query } from "@nestjs/common";
-import { QueryBus } from "@nestjs/cqrs";
-import { TransfersQuery } from "../../application/queries/transfers.query";
-import { HorseTransferYearlyQuery } from "../../application/queries/horseTransferYearly/horseTransferYearly.query";
+import { Body, Controller, Post } from "@nestjs/common";
+import { CommandBus } from "@nestjs/cqrs";
+import { RegisterAccountCommand } from "../../application/commands/registerAccount/registerAccount.command";
 
-@Controller('login')
+@Controller('register')
 export class RegisterController {
   constructor(
-    private queryBus: QueryBus
+    private commandBus: CommandBus
   ) {}
 
-  @Post('')
-  async queryTransfers(
-    @Body('horseId') horseId: string,
-    @Body('dateFrom') dateFrom: string,
-    @Body('dateTo') dateTo: string
+  @Post()
+  async registerMember(
+    @Body('email') email: string,
+    @Body('password') password: string,
   ) {
-    let dateF: string;
-    let dateT: string;
-    if(dateFrom) {
-      dateF = new Date(dateFrom).toISOString();
-    }
-    if(dateTo) {
-      dateT = new Date(dateTo).toISOString();
-    }
-    return this.queryBus.execute(
-      new TransfersQuery(horseId, dateF, dateT)
-    );
-  }
-
-  @Post('transfer-yearly')
-  async horseTrasnferYearly(
-    @Body('horseId') horseId ?: string,
-    @Body('fromDate') fromDate ?: string,
-    @Body('toDate') toDate ?: string,
-    @Body('index') index ?: number,
-    @Body('limit') limit ?: number,
-  ) {
-    return this.queryBus.execute(
-      new HorseTransferYearlyQuery(horseId, fromDate, toDate, index, limit)
+    console.log('Registering member with email:', email);
+    return this.commandBus.execute(
+      new RegisterAccountCommand(email, password)
     );
   }
 
